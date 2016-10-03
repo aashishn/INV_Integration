@@ -1,0 +1,61 @@
+<html>
+<h3>Following is the list of records failed in integration.</h3>
+<body>
+	<table border="1">
+		<thead>
+			<th>Job Name</th>
+			<th>Object Name</th>
+			<th>Object Id</th>
+			<th>Error Message</th>
+			<th>Sync State</th>
+			<th>Time</th>
+		</thead>
+		<tbody>
+			<tr th:each="result : ${results}">
+			
+				<th:block th:if="${result.get('JOB_NAME')}">
+					<td th:text="${result.get('JOB_NAME')}"></td>
+				</th:block>
+				<th:block th:unless="${result.get('JOB_NAME')}">
+					<td></td>
+				</th:block>
+				
+				<th:block th:if="${result.get('OBJECT_NAME')}">
+					<td th:text="${result.get('OBJECT_NAME')}"></td>
+				</th:block>
+				<th:block th:unless="${result.get('OBJECT_NAME')}">
+					<td></td>
+				</th:block>
+				
+				<th:block th:if="${result.get('OBJECT_ID')}">
+					<td th:text="${result.get('OBJECT_ID')}"></td>
+				</th:block>
+				<th:block th:unless="${result.get('OBJECT_ID')}">
+					<td></td>
+				</th:block>
+				
+				<th:block th:if="${result.get('ERROR_MESSAGE')}">
+					<td th:text="${result.get('ERROR_MESSAGE')}"></td>
+				</th:block>
+				<th:block th:unless="${result.get('ERROR_MESSAGE')}">
+					<td></td>
+				</th:block>
+				
+				<th:block th:if="${result.get('SYNC_STATE')}">
+					<td th:text="${result.get('SYNC_STATE')}"></td>
+				</th:block>
+				<th:block th:unless="${result.get('SYNC_STATE')}">
+					<td></td>
+				</th:block>
+				
+				<th:block th:if="${result.get('LAST_UPDATED')}">
+					<td th:text="${result.get('LAST_UPDATED')}"></td>
+				</th:block>
+				<th:block th:unless="${result.get('LAST_UPDATED')}">
+					<td></td>
+				</th:block>
+			</tr>
+		</tbody>
+	</table>
+</body>
+</html>

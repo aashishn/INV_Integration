@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definations>
+	 <ws wsdlUrl="https://ntlwebesbqa01.netbsa.org/Domain.svc" module="bsa">
+	  <operation>
+	   <soapAction>http://tempuri.org/IDomain/Dequeue</soapAction>
+	   <namespaces>
+		    <namespace prefix="tem" uri="http://tempuri.org/">
+		   	  <tags>Dequeue</tags>
+		    </namespace>
+	     </namespaces>
+	  </operation>
+	 </ws>
+	 <ws wsdlUrl="https://eaag-test.fin.us2.oraclecloud.com/finArTrxnsInvoices/InvoiceService?wsdl" module="fin">
+		<operation>
+			<soapAction>http://xmlns.oracle.com/apps/financials/receivables/transactions/invoices/invoiceService/processInterfaceLine</soapAction>
+			<namespaces>
+				<namespace prefix="typ" uri="http://xmlns.oracle.com/apps/financials/receivables/transactions/invoices/invoiceService/types/">
+					<tags>processInterfaceLine</tags>
+				</namespace>
+				<namespace prefix="inv" uri="http://xmlns.oracle.com/apps/financials/receivables/transactions/invoices/invoiceService/">
+					<tags>interfaceLine</tags>
+				</namespace>
+				<namespace prefix="tran" uri="http://xmlns.oracle.com/apps/financials/receivables/transactions/autoInvoices/model/flex/TransactionInterfaceGdf/">
+					<tags>TransactionInterfaceGdf</tags>
+				</namespace>
+				<namespace prefix="tran1" uri="http://xmlns.oracle.com/apps/financials/receivables/transactions/autoInvoices/model/flex/TransactionLineInterfaceGdf/">
+					<tags>TransactionLineInterfaceGdf</tags>
+				</namespace>
+				<namespace prefix="tran2" uri="http://xmlns.oracle.com/apps/flex/financials/receivables/transactions/autoInvoices/TransactionLineInterfaceLineDff/">
+					<tags>TransactionInterfaceLineDff</tags>
+				</namespace>
+				<namespace prefix="tran3" uri="http://xmlns.oracle.com/apps/flex/financials/receivables/transactions/autoInvoices/TransactionInterfaceLinkToDff/">
+					<tags>TransactionInterfaceLinkToDff</tags>
+				</namespace>
+				
+				<namespace prefix="tran4" uri="http://xmlns.oracle.com/apps/flex/financials/receivables/transactions/autoInvoices/TransactionInterfaceReferenceDff/">
+					<tags>TransactionInterfaceReferenceDff</tags>
+				</namespace>
+				<namespace prefix="tran5" uri="http://xmlns.oracle.com/apps/flex/financials/receivables/transactions/autoInvoices/TransactionLineDff/">
+					<tags>TransactionLineDff</tags>
+				</namespace>
+				<namespace prefix="typ1" uri="http://xmlns.oracle.com/adf/svc/types/">
+					<tags>processControl</tags>
+				</namespace>
+			</namespaces>
+		</operation>
+	</ws>	 
+</definations>
