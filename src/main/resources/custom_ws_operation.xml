@@ -90,4 +90,19 @@
 		</namespaces>
 	 </operation>
 	</ws>	 
+	
+	
+	<ws wsdlUrl="https://eeal-test.scm.us2.oraclecloud.com/egpItems/ItemServiceV2?wsdl" module="item">
+	 <operation>
+	 <soapAction>http://xmlns.oracle.com/apps/scm/productModel/items/itemServiceV2/findItem</soapAction>
+		<namespaces>
+			<namespace prefix="typ" uri="http://xmlns.oracle.com/apps/scm/productModel/items/itemServiceV2/types/">
+				<tags>findItem</tags>
+			</namespace>
+			<namespace prefix="typ1" uri="http://xmlns.oracle.com/adf/svc/types/">
+			<tags>findCriteria findControl filter group item sortOrder childFindCriteria sortOrder sortAttribute nested</tags>
+			</namespace>
+		</namespaces>
+	 </operation>
+	</ws>	 
 </definations>

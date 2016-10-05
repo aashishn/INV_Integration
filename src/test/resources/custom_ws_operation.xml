@@ -44,5 +44,65 @@
 				</namespace>
 			</namespaces>
 		</operation>
+		<operation>
+			<soapAction>http://xmlns.oracle.com/apps/financials/receivables/transactions/invoices/invoiceService/createInterfaceLine</soapAction>
+			<namespaces>
+				<namespace prefix="typ" uri="http://xmlns.oracle.com/apps/financials/receivables/transactions/invoices/invoiceService/types/">
+					<tags>createInterfaceLine</tags>
+				</namespace>
+				<namespace prefix="inv" uri="http://xmlns.oracle.com/apps/financials/receivables/transactions/invoices/invoiceService/">
+					<tags>interfaceLine</tags>
+				</namespace>
+				<namespace prefix="tran" uri="http://xmlns.oracle.com/apps/financials/receivables/transactions/autoInvoices/model/flex/TransactionInterfaceGdf/">
+					<tags>TransactionInterfaceGdf</tags>
+				</namespace>
+				<namespace prefix="tran1" uri="http://xmlns.oracle.com/apps/financials/receivables/transactions/autoInvoices/model/flex/TransactionLineInterfaceGdf/">
+					<tags>TransactionLineInterfaceGdf</tags>
+				</namespace>
+				<namespace prefix="tran2" uri="http://xmlns.oracle.com/apps/flex/financials/receivables/transactions/autoInvoices/TransactionLineInterfaceLineDff/">
+					<tags>TransactionInterfaceLineDff</tags>
+				</namespace>
+				<namespace prefix="tran3" uri="http://xmlns.oracle.com/apps/flex/financials/receivables/transactions/autoInvoices/TransactionInterfaceLinkToDff/">
+					<tags>TransactionInterfaceLinkToDff</tags>
+				</namespace>
+				
+				<namespace prefix="tran4" uri="http://xmlns.oracle.com/apps/flex/financials/receivables/transactions/autoInvoices/TransactionInterfaceReferenceDff/">
+					<tags>TransactionInterfaceReferenceDff</tags>
+				</namespace>
+				<namespace prefix="tran5" uri="http://xmlns.oracle.com/apps/flex/financials/receivables/transactions/autoInvoices/TransactionLineDff/">
+					<tags>TransactionLineDff</tags>
+				</namespace>
+				<namespace prefix="typ1" uri="http://xmlns.oracle.com/adf/svc/types/">
+					<tags>processControl</tags>
+				</namespace>
+			</namespaces>
+		</operation>		
+	</ws>
+	<ws wsdlUrl="https://eaag-test.crm.us2.oraclecloud.com/xmlpserver/services/v2/ReportService?wsdl" module="bi">
+	 <operation>
+	 <soapAction>http://xmlns.oracle.com/oxp/service/v2/runDataModel</soapAction>
+		<namespaces>
+			<namespace prefix="v2" uri="http://xmlns.oracle.com/oxp/service/v2/">
+				<tags>reportRequest</tags>
+				<tags>userID</tags>
+				<tags>password</tags>
+			</namespace>
+		</namespaces>
+	 </operation>
+	</ws>	 
+	
+	
+	<ws wsdlUrl="https://eeal-test.scm.us2.oraclecloud.com/egpItems/ItemServiceV2?wsdl" module="item">
+	 <operation>
+	 <soapAction>http://xmlns.oracle.com/apps/scm/productModel/items/itemServiceV2/findItem</soapAction>
+		<namespaces>
+			<namespace prefix="typ" uri="http://xmlns.oracle.com/apps/scm/productModel/items/itemServiceV2/types/">
+				<tags>findItem</tags>
+			</namespace>
+			<namespace prefix="typ1" uri="http://xmlns.oracle.com/adf/svc/types/">
+			<tags>findCriteria findControl filter group item sortOrder childFindCriteria sortOrder sortAttribute nested</tags>
+			</namespace>
+		</namespaces>
+	 </operation>
 	</ws>	 
 </definations>
