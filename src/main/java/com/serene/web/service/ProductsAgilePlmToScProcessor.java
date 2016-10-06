@@ -3,6 +3,7 @@ package com.serene.web.service;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Objects;
 
 import javax.annotation.Resource;
 
@@ -71,10 +72,21 @@ public class ProductsAgilePlmToScProcessor implements ItemProcessor<Map<String,O
 				if(jarray!=null && jarray.size()>0){
 					jobject = jarray.get(0).getAsJsonObject();
 					inventoryItemId = jobject.get(batchJobContext.getCurrentObject().getItemWriter().getObjectIdField()).getAsLong();
+					if(inventoryItemId!=null){			
+						value.put(batchJobContext.getCurrentObject().getItemWriter().getObjectIdField(), inventoryItemId);
+						boolean updateInSc = false;
+						for(String key: value.keySet()){
+							if(!Objects.equals(value.get(key),jobject.get(key))){
+								updateInSc = true;
+								break;
+							}
+						}
+						if(!updateInSc){
+							log.debug("Skipping unchanged product- "+item.get(batchJobContext.getCurrentObject().getItemReader().getObjectIdField()));
+							return null;
+						}
+					}
 				}
-			}
-			if(inventoryItemId!=null){			
-				value.put(batchJobContext.getCurrentObject().getItemWriter().getObjectIdField(), inventoryItemId);
 			}
 		}catch(Exception e){
 			log.error("Error while processing data ",e);
