@@ -69,9 +69,7 @@ public class AccountsEbsToScProcessor implements ItemProcessor<Map<String,Object
 					item.put(Constants.SC_EBS_STATUS, Constants.SC_ACCOUNT_STATUS_INACTIVE);
 				}
 				ebsOscPartyId = (String)item.get(Constants.EBS_SITE_OSC_PARTY_ID);
-				if(StringUtils.isNotBlank(ebsOscPartyId)){
-					item.put(Constants.EBS_SALES_CHANNEL_FIELD,null);
-				}
+				item.put(Constants.EBS_SALES_CHANNEL_FIELD,null);
 				String resp = genericOscRestService.getByExternalSystemId(url,externalSystemIdFieldName,parentAccountEbsNumber);
 				if(StringUtils.isNotBlank(resp)){
 					JsonElement jelement = new JsonParser().parse(resp);
