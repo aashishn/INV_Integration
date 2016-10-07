@@ -43,6 +43,8 @@ public class AccountsEbsToScProcessor implements ItemProcessor<Map<String,Object
 	private GenericOscRestService genericOscRestService;
 
     private static final Map<String, String> salesChannelMap;
+    private static final Map<String, Boolean> billToShipToMap;
+
     static
     {
     	salesChannelMap = new HashMap<String, String>();
@@ -53,6 +55,12 @@ public class AccountsEbsToScProcessor implements ItemProcessor<Map<String,Object
     	salesChannelMap.put("CM", "CM");
     	salesChannelMap.put("DIRECT", "Direct");
     	salesChannelMap.put("INTERCO", "Intercompany");
+    	
+    	billToShipToMap = new HashMap<String, Boolean>();
+    	billToShipToMap.put("Y", true);
+    	billToShipToMap.put("P", true);
+    	billToShipToMap.put("y", true);
+    	billToShipToMap.put("p", true);
     }
     
 	@Override
@@ -111,7 +119,19 @@ public class AccountsEbsToScProcessor implements ItemProcessor<Map<String,Object
 			
 			if(item.get(Constants.EBS_SALES_CHANNEL_FIELD)!=null && salesChannelMap.get(item.get(Constants.EBS_SALES_CHANNEL_FIELD))!=null){
 				item.put(Constants.EBS_SALES_CHANNEL_FIELD, salesChannelMap.get(item.get(Constants.EBS_SALES_CHANNEL_FIELD)));
+			}			
+			if(item.get(Constants.EBS_BILL_TO_FIELD)!=null && billToShipToMap.get(item.get(Constants.EBS_BILL_TO_FIELD))!=null){
+				item.put(Constants.EBS_BILL_TO_FIELD, billToShipToMap.get(item.get(Constants.EBS_BILL_TO_FIELD)));
+			}else{
+				item.put(Constants.EBS_BILL_TO_FIELD, false);				
 			}
+				
+			if(item.get(Constants.EBS_SHIP_TO_FIELD)!=null && billToShipToMap.get(item.get(Constants.EBS_SHIP_TO_FIELD))!=null){
+				item.put(Constants.EBS_SHIP_TO_FIELD, billToShipToMap.get(item.get(Constants.EBS_SHIP_TO_FIELD)));
+			}else{
+				item.put(Constants.EBS_SHIP_TO_FIELD, false);				
+			}
+			
 		}catch(Exception e){
 			log.error("Error while processing data ",e);
             this.logErrorInDb(item, e);

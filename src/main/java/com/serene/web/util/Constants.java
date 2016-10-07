@@ -18,6 +18,8 @@ public class Constants {
 	public static final String EBS_ACCOUNT_STATUS_FIELD = "ACCOUNT_STATUS";
 	public static final String EBS_SITE_STATUS_FIELD = "SITE_STATUS";
 	public static final String EBS_SALES_CHANNEL_FIELD = "SALES_CHANNEL";
+	public static final String EBS_BILL_TO_FIELD = "BILL_TO_FLAG";
+	public static final String EBS_SHIP_TO_FIELD = "SHIP_TO_FLAG";
 	  
 	public static final String SC_ACCOUNT_STATUS_INACTIVE = "Inactive";
 	public static final String SC_PARENT_ACCOUNT_PARTY_ID = "ParentAccountPartyId";
