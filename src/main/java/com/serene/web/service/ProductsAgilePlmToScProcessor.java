@@ -89,6 +89,7 @@ public class ProductsAgilePlmToScProcessor implements ItemProcessor<Map<String,O
 						}
 						if(!updateInSc){
 							log.debug("Skipping unchanged product- "+item.get(batchJobContext.getCurrentObject().getItemReader().getObjectIdField()));
+							this.jobUtils.logItem(value, "", "COMPLETED", null);
 							return null;
 						}
 					}
