@@ -76,7 +76,13 @@ public class ProductsAgilePlmToScProcessor implements ItemProcessor<Map<String,O
 						value.put(batchJobContext.getCurrentObject().getItemWriter().getObjectIdField(), inventoryItemId);
 						boolean updateInSc = false;
 						for(String key: value.keySet()){
-							if(!Objects.equals(value.get(key),jobject.get(key))){
+							String crmValue = jobject.get(key)!=null && !jobject.get(key).isJsonNull()?jobject.get(key).getAsString():null;
+							if(crmValue!=null && crmValue.startsWith("\"")){
+								crmValue = StringUtils.stripStart(crmValue, "\"");
+								crmValue = StringUtils.stripEnd(crmValue, "\"");
+							}
+							String agileValue = value.get(key)!=null && StringUtils.isNotBlank(String.valueOf(value.get(key)))?String.valueOf(value.get(key)):null;
+							if(!Objects.equals(agileValue,crmValue)){
 								updateInSc = true;
 								break;
 							}
