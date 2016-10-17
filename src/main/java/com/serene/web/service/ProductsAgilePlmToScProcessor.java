@@ -75,7 +75,7 @@ public class ProductsAgilePlmToScProcessor implements ItemProcessor<Map<String,O
 					if(inventoryItemId!=null){			
 						value.put(batchJobContext.getCurrentObject().getItemWriter().getObjectIdField(), inventoryItemId);
 						boolean updateInSc = false;
-						if(Constants.EBS_PRODUCT_LIFECYCLE_PHASE_OBSOLETE.equals(item.get(Constants.EBS_PRODUCT_LIFECYCLE_PHASE))){
+						if(Constants.EBS_PRODUCT_LIFECYCLE_PHASE_OBSOLETE.equals(String.valueOf(item.get(Constants.EBS_PRODUCT_LIFECYCLE_PHASE)))){
 							value.put(Constants.SC_PRODUCT_ELIGIBLE_TO_SELL_FLAG, false);
 						}else{
 							value.put(Constants.SC_PRODUCT_ELIGIBLE_TO_SELL_FLAG, true);
