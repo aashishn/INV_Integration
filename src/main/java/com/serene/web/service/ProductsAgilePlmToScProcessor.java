@@ -100,13 +100,18 @@ public class ProductsAgilePlmToScProcessor implements ItemProcessor<Map<String,O
             this.logErrorInDb(item, e);
             return null;
 		}
+		if(Constants.EBS_PRODUCT_LIFECYCLE_PHASE_OBSOLETE.equals(item.get(Constants.EBS_PRODUCT_LIFECYCLE_PHASE))){
+			value.put(Constants.SC_PRODUCT_ELIGIBLE_TO_SELL_FLAG, false);
+		}else{
+			value.put(Constants.SC_PRODUCT_ELIGIBLE_TO_SELL_FLAG, true);
+		}
 		return value;
 	}
 	
     public void logErrorInDb(Map<String, Object> item, Exception e) {
         try {
-            this.jobUtils.logItemErrorStatus(e, item);        }
-        catch (Exception e1) {
+            this.jobUtils.logItemErrorStatus(e, item);       
+        }catch (Exception e1) {
             log.error("Error while writing error log ", (Throwable)e1);
         }
     }
