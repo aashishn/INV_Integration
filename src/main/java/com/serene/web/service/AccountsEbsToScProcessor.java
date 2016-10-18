@@ -87,7 +87,11 @@ public class AccountsEbsToScProcessor implements ItemProcessor<Map<String,Object
 						jobject = jarray.get(0).getAsJsonObject();
 						parentAccountPartyId = jobject.get(Constants.SC_ACCOUNT_PARTY_ID).getAsLong();
 						item.put(Constants.SC_PARENT_ACCOUNT_PARTY_ID,parentAccountPartyId);
+					}else{
+						throw new Exception("Error inserting/updating account. Parent Account "+parentAccountEbsNumber+ " does not exist in Sales Cloud.");
 					}
+				}else{
+					throw new Exception("Error inserting/updating account. Parent Account "+parentAccountEbsNumber+ " does not exist in Sales Cloud.");
 				}
 			}else{
 				if(item.get(Constants.EBS_ACCOUNT_STATUS_FIELD)!=null && ((String)item.get(Constants.EBS_ACCOUNT_STATUS_FIELD)).equalsIgnoreCase(Constants.EBS_ACCOUNT_STATUS_INACTIVE)){
