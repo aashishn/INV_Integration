@@ -50,12 +50,12 @@ public class JobTests {
 	@Test
 	@SuppressWarnings("unchecked")
 	public void runJobByName() throws Exception{
-//		JobDetail j = jobSchedulerMetadataDao.findOne("ACCOUNTS_EBS_TO_SC") ;
-//		
-//		AbstractJobScheduler jobScheduler =  (AbstractJobScheduler) applicationContext.getBean(InitializeJobFromDbMetadata.get(j.getInterfaceType()));
-//		jobScheduler.setJobName(j.getJobName());
-//		jobScheduler.loadJob();
-//		jobScheduler.run();
+		JobDetail j = jobSchedulerMetadataDao.findOne("PRODUCTS_AGILEPLM_TO_SC");
+		
+		AbstractJobScheduler jobScheduler =  (AbstractJobScheduler) applicationContext.getBean(InitializeJobFromDbMetadata.get(j.getInterfaceType()));
+		jobScheduler.setJobName(j.getJobName());
+		jobScheduler.loadJob();
+		jobScheduler.run();
 		log.info(" Test Completed");
 	}	
 }
