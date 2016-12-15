@@ -3,13 +3,13 @@
 
 	<!-- Simple file output -->
 	<appender name="FILE" 	class="ch.qos.logback.core.rolling.RollingFileAppender">
-		<file>/opt/tomcat/logs/INV_Integration.log</file>
+		<file> /CRM/tomcat8/apache-tomcat-8.0.39/logs/INV_Integration/INV_Integration.log</file>
 		<encoder>	
 			<pattern>%d{MM-dd-yyyy HH:mm:ss.SSS} [%thread] %-5level %logger{36} - %msg%n
 			</pattern>
 		</encoder>
 		<rollingPolicy class="ch.qos.logback.core.rolling.FixedWindowRollingPolicy">
-			<fileNamePattern>/opt/tomcat/logs/INV_Integration.%i.log.zip</fileNamePattern>
+			<fileNamePattern> /CRM/tomcat8/apache-tomcat-8.0.39/logs/INV_Integration/INV_Integration.%i.log.zip</fileNamePattern>
 			<minIndex>1</minIndex>
       		<maxIndex>10</maxIndex>
 		</rollingPolicy>
@@ -20,7 +20,7 @@
 	</appender>
 
 	<appender name="ERROR"	class="ch.qos.logback.core.rolling.RollingFileAppender">
-		<file>/opt/tomcat/logs/INV_Integration-error.log</file>
+		<file> /CRM/tomcat8/apache-tomcat-8.0.39/logs/INV_Integration/INV_Integration-error.log</file>
 		<encoder>	
 			<pattern>%d{MM-dd-yyyy HH:mm:ss.SSS} [%thread] %-5level %logger{36} - %msg%n
 			</pattern>
@@ -30,7 +30,7 @@
     	</filter>
     	
 		<rollingPolicy class="ch.qos.logback.core.rolling.FixedWindowRollingPolicy">
-			<fileNamePattern>/opt/tomcat/logs/INV_Integration-error.%i.log.zip</fileNamePattern>
+			<fileNamePattern> /CRM/tomcat8/apache-tomcat-8.0.39/logs/INV_Integration/INV_Integration-error.%i.log.zip</fileNamePattern>
 			<minIndex>1</minIndex>
       		<maxIndex>10</maxIndex>
 		</rollingPolicy>
@@ -76,12 +76,12 @@
 <!-- 		<appender-ref ref="STDOUT" /> -->
 	</logger>
 	<logger name="com.serene">
-		<level value="DEBUG" />
+		<level value="TRACE" />
 		<appender-ref ref="FILE" />
 		<appender-ref ref="STDOUT" />
 	</logger>
 	
-    <logger name="org.hibernate.SQL" level="INFO" >
+    <logger name="org.hibernate.SQL" level="ERROR" >
     	<appender-ref ref="FILE" />
     	<appender-ref ref="ERROR" />
     </logger>
@@ -91,7 +91,7 @@
 
 	<!-- Enable FILE and STDOUT appenders for all log messages. By default, 
 		only log at level INFO and above. -->
-	<root level="info">
+	<root level="INFO">
 		<appender-ref ref="FILE" />
 		<appender-ref ref="ERROR" />
 <!--  		<appender-ref ref="STDOUT" /> -->

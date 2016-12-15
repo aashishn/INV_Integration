@@ -25,6 +25,7 @@ import com.agile.api.IRow;
 import com.agile.api.ITable;
 import com.agile.api.ItemConstants;
 import com.serene.web.util.Constants;
+import com.serene.ws.util.ConfigUtil;
 
 
 @Service
@@ -213,9 +214,9 @@ public class AgilePlmService {
 		System.setProperty("disable.agile.sessionID.generation", "true");
 		HashMap params = new HashMap();
 
-		params.put(AgileSessionFactory.USERNAME, Constants.AGILE_PLM_USERNAME);
-		params.put(AgileSessionFactory.PASSWORD, Constants.AGILE_PLM_PASSWORD);
-		factory = AgileSessionFactory.getInstance(Constants.AGILE_PLM_URL);
+		params.put(AgileSessionFactory.USERNAME, ConfigUtil.getProperty(Constants.AGILE_PLM_USERNAME));
+		params.put(AgileSessionFactory.PASSWORD, ConfigUtil.getProperty(Constants.AGILE_PLM_PASSWORD));
+		factory = AgileSessionFactory.getInstance(ConfigUtil.getProperty(Constants.AGILE_PLM_URL));
 		session = factory.createSession(params);
 		return session;
 	}

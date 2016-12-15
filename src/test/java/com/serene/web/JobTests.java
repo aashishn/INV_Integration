@@ -4,6 +4,7 @@
  */
 package com.serene.web;
 
+import java.util.Map;
 import java.util.logging.Logger;
 
 import javax.annotation.Resource;
@@ -23,6 +24,7 @@ import com.serene.job.repo.model.JobDetail;
 import com.serene.job.scheduler.AbstractJobScheduler;
 import com.serene.job.util.JobUtils;
 import com.serene.web.email.EmailHtmlSender;
+import com.serene.ws.service.FusionWebService;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @SpringApplicationConfiguration(classes = WebConfig.class)
@@ -31,6 +33,9 @@ import com.serene.web.email.EmailHtmlSender;
 public class JobTests {
 
 	private static Logger log = Logger.getLogger(JobTests.class.getName()); 
+	
+	@Resource
+	private FusionWebService fusionWebService;  
 	
 	@Resource
 	private JobSchedulerMetadataDao jobSchedulerMetadataDao ;  
@@ -57,5 +62,11 @@ public class JobTests {
 		jobScheduler.loadJob();
 		jobScheduler.run();
 		log.info(" Test Completed");
-	}	
+	}
+	
+	@Test
+	public void fqlWithChildColumns() throws Exception{
+		Map<String,Object> response = fusionWebService.query("Select ParentAccountPartyId,PartyId,OrganizationName,OrganizationDEO_CustomerType_c,OwnerName,OwnerPartyId,SalesTeamMember.AccessLevelCode,SalesTeamMember.CreationDate,SalesTeamMember.LastUpdateDate,SalesTeamMember.ResourceId,SalesTeamMember.ResourceRoleName,SalesTeamMember.TeamMemberId from Account where LastUpdateDate AFTER '1800-10-10T12:34:06.042Z' order by LastUpdateDate asc");   
+		log.info(response.toString());
+	}
 }

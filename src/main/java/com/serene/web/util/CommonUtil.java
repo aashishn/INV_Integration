@@ -13,6 +13,8 @@ import java.util.concurrent.LinkedBlockingQueue;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.util.Base64Utils;
 
+import com.serene.ws.util.ConfigUtil;
+
 
 public class CommonUtil {
 
@@ -54,8 +56,8 @@ public class CommonUtil {
 	}
 
 	public static String getAuthorizationStringFromCredentials(){
-		String name = "IUSER";//TODO get from prop
-		String password = "Serene123";//TODO get from prop
+		String name = ConfigUtil.getProperty(Constants.SC_USERNAME);
+		String password = ConfigUtil.getProperty(Constants.SC_PASSWORD);
 		String authString = name + ":" + password;
 		byte[] authEncBytes = Base64Utils.encode(authString.getBytes());
 		return "Basic " + new String(authEncBytes);

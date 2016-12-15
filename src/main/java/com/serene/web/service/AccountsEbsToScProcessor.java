@@ -41,6 +41,9 @@ public class AccountsEbsToScProcessor implements ItemProcessor<Map<String,Object
 
 	@Resource
 	private GenericOscRestService genericOscRestService;
+	
+	@Resource
+	private AccountOscWsClient accountOscWsClient; 
 
     private static final Map<String, String> salesChannelMap;
     private static final Map<String, Boolean> billToShipToMap;
@@ -78,7 +81,7 @@ public class AccountsEbsToScProcessor implements ItemProcessor<Map<String,Object
 				}
 				ebsOscPartyId = (String)item.get(Constants.EBS_SITE_OSC_PARTY_ID);
 				item.put(Constants.EBS_SALES_CHANNEL_FIELD,null);
-				String resp = genericOscRestService.getByExternalSystemId(url,externalSystemIdFieldName,parentAccountEbsNumber);
+/*				String resp = genericOscRestService.getByExternalSystemId(url,externalSystemIdFieldName,parentAccountEbsNumber);
 				if(StringUtils.isNotBlank(resp)){
 					JsonElement jelement = new JsonParser().parse(resp);
 					JsonObject  jobject = jelement.getAsJsonObject();
@@ -91,6 +94,11 @@ public class AccountsEbsToScProcessor implements ItemProcessor<Map<String,Object
 						throw new Exception("Error inserting/updating account. Parent Account "+parentAccountEbsNumber+ " does not exist in Sales Cloud.");
 					}
 				}else{
+					throw new Exception("Error inserting/updating account. Parent Account "+parentAccountEbsNumber+ " does not exist in Sales Cloud.");
+				} */
+				parentAccountPartyId = accountOscWsClient.findAccountOscByExternalId(externalSystemIdFieldName,parentAccountEbsNumber);
+				item.put(Constants.SC_PARENT_ACCOUNT_PARTY_ID,parentAccountPartyId);
+				if(parentAccountPartyId==null){
 					throw new Exception("Error inserting/updating account. Parent Account "+parentAccountEbsNumber+ " does not exist in Sales Cloud.");
 				}
 			}else{
@@ -105,7 +113,7 @@ public class AccountsEbsToScProcessor implements ItemProcessor<Map<String,Object
 				partyId = Long.valueOf(ebsOscPartyId);
 			}
 			if(partyId==null){	
-				String resp = genericOscRestService.getByExternalSystemId(url,externalSystemIdFieldName,String.valueOf(item.get(Constants.EBS_ORACLE_CUSTOMER_NUMBER)));
+/*				String resp = genericOscRestService.getByExternalSystemId(url,externalSystemIdFieldName,String.valueOf(item.get(Constants.EBS_ORACLE_CUSTOMER_NUMBER)));
 				
 				if(StringUtils.isNotBlank(resp)){
 					JsonElement jelement = new JsonParser().parse(resp);
@@ -115,7 +123,8 @@ public class AccountsEbsToScProcessor implements ItemProcessor<Map<String,Object
 						jobject = jarray.get(0).getAsJsonObject();
 						partyId = jobject.get(batchJobContext.getCurrentObject().getItemWriter().getObjectIdField()).getAsLong();
 					}
-				}
+				} */
+				partyId = accountOscWsClient.findAccountOscByExternalId(externalSystemIdFieldName,String.valueOf(item.get(Constants.EBS_ORACLE_CUSTOMER_NUMBER)));
 			}
 			if(partyId!=null){			
 				item.put(batchJobContext.getCurrentObject().getItemWriter().getObjectIdField(), partyId);

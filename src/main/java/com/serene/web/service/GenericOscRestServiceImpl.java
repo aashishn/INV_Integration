@@ -27,9 +27,9 @@ public class GenericOscRestServiceImpl implements GenericOscRestService{
 
 	private static Logger log = LoggerFactory.getLogger(GenericOscRestServiceImpl.class);
 	
-	private String USER_AGENT="Mozilla/5.0";//TODO Get from properties file
+	private String USER_AGENT="Mozilla/5.0";
 
-	public String create(String url, String jsonString) throws ClientProtocolException, IOException{
+	public String create(String url, String jsonString) throws Exception{
 		CloseableHttpClient httpClient = HttpClients.createDefault();
 		HttpPost httpPost = new HttpPost(url);
 		httpPost.addHeader("User-Agent", USER_AGENT);
@@ -42,7 +42,7 @@ public class GenericOscRestServiceImpl implements GenericOscRestService{
 
 		log.debug("POST Response Status:: "
 				+ httpResponse.getStatusLine().getStatusCode());
-
+		
 		BufferedReader reader = new BufferedReader(new InputStreamReader(
 				httpResponse.getEntity().getContent()));
 
@@ -54,13 +54,17 @@ public class GenericOscRestServiceImpl implements GenericOscRestService{
 		}
 		reader.close();
 
+		if(httpResponse.getStatusLine().getStatusCode()!=200 && httpResponse.getStatusLine().getStatusCode()!=201){
+			throw new Exception("Error in create: "+response.toString());
+		}
+		
 		// print result
 		log.debug(response.toString());
 		httpClient.close();
 		return response.toString();		
 	}
 	
-	public String updateUsingPatch(String url, String jsonString) throws ClientProtocolException, IOException{
+	public String updateUsingPatch(String url, String jsonString) throws Exception{
 		CloseableHttpClient httpClient = HttpClients.createDefault();
 		HttpPatch httpPatch = new HttpPatch(url);
 		httpPatch.addHeader("User-Agent", USER_AGENT);
@@ -73,7 +77,7 @@ public class GenericOscRestServiceImpl implements GenericOscRestService{
 
 		log.debug("POST Response Status:: "
 				+ httpResponse.getStatusLine().getStatusCode());
-
+		
 		BufferedReader reader = new BufferedReader(new InputStreamReader(
 				httpResponse.getEntity().getContent()));
 
@@ -85,13 +89,17 @@ public class GenericOscRestServiceImpl implements GenericOscRestService{
 		}
 		reader.close();
 
+		if(httpResponse.getStatusLine().getStatusCode()!=200 && httpResponse.getStatusLine().getStatusCode()!=201){
+			throw new Exception("Error in updateUsingPatch: "+response.toString());
+		}
+		
 		// print result
 		log.debug(response.toString());
 		httpClient.close();
 		return response.toString();		
 	}
 	
-	public String getById(String url, Long id) throws ClientProtocolException, IOException{
+	public String getById(String url, Long id) throws Exception{
 		CloseableHttpClient httpClient = HttpClients.createDefault();
 		url = url + "/" + String.valueOf(id);
 		HttpGet httpGet = new HttpGet(url);
@@ -101,7 +109,7 @@ public class GenericOscRestServiceImpl implements GenericOscRestService{
 
 		log.debug("GET Response Status:: "
 				+ httpResponse.getStatusLine().getStatusCode());
-
+		
 		BufferedReader reader = new BufferedReader(new InputStreamReader(
 				httpResponse.getEntity().getContent()));
 
@@ -113,13 +121,17 @@ public class GenericOscRestServiceImpl implements GenericOscRestService{
 		}
 		reader.close();
 
+		if(httpResponse.getStatusLine().getStatusCode()!=200 && httpResponse.getStatusLine().getStatusCode()!=201){
+			throw new Exception("Error in getById: "+response.toString());
+		}
+		
 		// print result
 		log.debug(response.toString());
 		httpClient.close();
 		return response.toString();		
 	}
 	
-	public String getAll(String url) throws ClientProtocolException, IOException{
+	public String getAll(String url) throws Exception{
 		CloseableHttpClient httpClient = HttpClients.createDefault();
 		HttpGet httpGet = new HttpGet(url);
 		httpGet.addHeader("User-Agent", USER_AGENT);
@@ -129,6 +141,10 @@ public class GenericOscRestServiceImpl implements GenericOscRestService{
 		log.debug("GET Response Status:: "
 				+ httpResponse.getStatusLine().getStatusCode());
 
+		if(httpResponse.getStatusLine().getStatusCode()!=200 && httpResponse.getStatusLine().getStatusCode()!=201){
+			throw new Exception("Error in getAll:"+httpResponse.getStatusLine().getStatusCode()+" "+httpResponse.getStatusLine().getReasonPhrase());
+		}
+		
 		BufferedReader reader = new BufferedReader(new InputStreamReader(
 				httpResponse.getEntity().getContent()));
 
@@ -140,6 +156,10 @@ public class GenericOscRestServiceImpl implements GenericOscRestService{
 		}
 		reader.close();
 
+		if(httpResponse.getStatusLine().getStatusCode()!=200 && httpResponse.getStatusLine().getStatusCode()!=201){
+			throw new Exception("Error in getAll: "+response.toString());
+		}
+		
 		// print result
 		log.debug(response.toString());
 		httpClient.close();
@@ -155,7 +175,7 @@ public class GenericOscRestServiceImpl implements GenericOscRestService{
 
 	@Override
 	public String getByExternalSystemId(String url, String externalSystemIdFieldName, Object externalSystemIdFieldValue)
-			throws ClientProtocolException, IOException {
+			throws Exception {
 		CloseableHttpClient httpClient = HttpClients.createDefault();
 		if(!(externalSystemIdFieldValue instanceof String))
 			externalSystemIdFieldValue = externalSystemIdFieldValue.toString();
@@ -180,6 +200,10 @@ public class GenericOscRestServiceImpl implements GenericOscRestService{
 		}
 		reader.close();
 
+		if(httpResponse.getStatusLine().getStatusCode()!=200 && httpResponse.getStatusLine().getStatusCode()!=201){
+			throw new Exception("Error in getByExternalSystemId: "+response.toString());
+		}
+		
 		// print result
 		log.debug(response.toString());
 		httpClient.close();

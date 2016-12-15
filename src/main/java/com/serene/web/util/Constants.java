@@ -2,11 +2,13 @@ package com.serene.web.util;
 
 public class Constants {
 	
-	public static final String AGILE_PLM_USERNAME = "anaravanekar";
-	public static final String AGILE_PLM_PASSWORD = "cTeACG5r";
-	public static final String AGILE_PLM_URL      = "http://agappdev.invcorp.invensense.com:7001/Agile/";
+	public static final String AGILE_PLM_USERNAME = "AGILE_PLM_USERNAME";
+	public static final String AGILE_PLM_PASSWORD = "AGILE_PLM_PASSWORD";
+	public static final String AGILE_PLM_URL      = "AGILE_PLM_URL";
 	public static final String SC_PRODUCT_REST_URL = "sc.product_rest_url";
 	public static final String SC_ACCOUNT_REST_URL = "sc.account_rest_url";
+	public static final String SC_USERNAME = "sc.username";
+	public static final String SC_PASSWORD = "sc.password";
 	   
 	public static final String EBS_ORACLE_CUSTOMER_NUMBER = "ORACLE_CUSTOMER_NUMBER";
 	public static final String EBS_ACCOUNT_OSC_PARTY_ID = "ACCOUNT_OSC_PARTY_ID";
